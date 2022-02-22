@@ -7,11 +7,13 @@ import { Role } from './roles.model'
 export class RolesService {
 	constructor(@InjectModel(Role) private roleRepository: typeof Role) {}
 
-	async createRole(role: CreateRoleDto) {
-		return await this.roleRepository.create(role)
+	async createRole(roleDto: CreateRoleDto) {
+		const role = await this.roleRepository.create(roleDto)
+		return role
 	}
 
-	async getRoleByValue(val: string) {
-		return await this.roleRepository.findOne({ where: { value: val } })
+	async getRoleByValue(value: string) {
+		const role = await this.roleRepository.findOne({ where: { value } })
+		return role
 	}
 }
